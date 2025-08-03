@@ -1,0 +1,25 @@
+{
+  "name": "ws-optimisation",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "server:start": "node --max-old-space-size=6096 --env-file=env/server.dev.env server/server.js",
+    "server:test": "node --max-old-space-size=6096 --env-file=env/server.test.env server/server.js",
+    "server:dev": "node --max-old-space-size=4096 --watch --env-file=env/server.dev.env server/server.js",
+    "client:start": "node client/app.js",
+    "client:dev": "node --watch --env-file=env/client.dev.env client/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "http-status-codes": "^2.3.0",
+    "memcached": "^2.2.2",
+    "morgan": "^1.10.1",
+    "pino": "^9.7.0",
+    "ws": "^8.18.3"
+  }
+}
