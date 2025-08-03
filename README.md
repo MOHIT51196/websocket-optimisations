@@ -60,19 +60,31 @@ npm run server:test
 - **Node.js**: v22.3.0
 - **Architecture**: ARM64_T8103
 
-### Stress Test: 1,000 Concurrent Connections, 500,000 Total Requests
+### Stress Test: 1,000 Concurrent Connections, 1,000,000 Total Requests
 
 | Metric | Clustered (8 workers) | Standalone (1 thread) |
 |--------|----------------------|----------------------|
-| **Success Rate** | 100% | 56.5% |
-| **Total Completed** | 500,000 | 282,500 |
-| **Failed Requests** | 0 | 217,500 |
-| **Avg Response Time** | 11.5ms | 6.3ms |
-| **Max Response Time** | 13.6ms | 2.7ms |
+| **Success Rate** | 100% | 49.3% |
+| **Total Completed** | 1,000,000 | 493,000 |
+| **Failed Requests** | 0 | 507,000 |
+| **Requests per Second** | 105,977 | 233,356 |
+| **Avg Response Time** | 9.4ms | 4.3ms |
+| **Min Response Time** | 0.003ms | 0.005ms |
+| **Max Response Time** | 3.536ms | 2.580ms |
+| **Time for 1M Requests** | 9.436s | 4.285s |
+
+### Response Time Percentiles (ms)
+| Percentile | Clustered | Standalone |
+|------------|-----------|------------|
+| 50% | 0.007 | 0.007 |
+| 90% | 0.010 | 0.009 |
+| 95% | 0.011 | - |
+| 98% | 0.018 | - |
+| 99% | 0.027 | - |
 
 ### The Trade-off
-- **Clustered**: Slower but bulletproof (100% success)
-- **Standalone**: Faster but breaks under load (43.5% failure rate)
+- **Clustered**: Reliable but slower (100% success, ~106K req/sec)
+- **Standalone**: Faster but unreliable (49.3% success, ~233K req/sec)
 
 ### Performance Notes
 - **8 worker processes** match the M1's 8 CPU cores
@@ -101,7 +113,7 @@ CLUSTER_CACHE_ENABLED=false
 ```bash
 # benchmark.sh - modify these for different tests
 CONCURRENCY=1000          # Concurrent connections
-TOTAL_REQUESTS=500000     # Total requests across all connections
+TOTAL_REQUESTS=1000000    # Total requests across all connections
 ```
 
 ## How the Benchmark Works
@@ -126,8 +138,8 @@ CONCURRENCY=100; TOTAL_REQUESTS=10000
 # Heavy: 500 connections, 50K requests
 CONCURRENCY=500; TOTAL_REQUESTS=50000
 
-# Stress: 1K connections, 500K requests
-CONCURRENCY=1000; TOTAL_REQUESTS=500000
+# Stress: 1K connections, 1M requests
+CONCURRENCY=1000; TOTAL_REQUESTS=1000000
 ```
 
 ## Server Architecture

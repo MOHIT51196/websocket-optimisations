@@ -8,7 +8,8 @@
     "server:test": "node --max-old-space-size=4096 --env-file=env/server.test.env server/server.js",
     "server:dev": "node --max-old-space-size=4096 --watch --env-file=env/server.dev.env server/server.js",
     "client:start": "node client/app.js",
-    "client:dev": "node --watch --env-file=env/client.dev.env client/app.js"
+    "client:dev": "node --watch --env-file=env/client.dev.env client/app.js",
+    "benchmark": "npx kill-port 8081 8080 5000 && ./benchmark.sh"
   },
   "keywords": [],
   "author": "",
