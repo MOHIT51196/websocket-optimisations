@@ -28,7 +28,7 @@ function handleConnection(ws, cache) {
     updateConnectionCount(ws, cache, 1);
     logger.info("Client connected");
     ws.on("message", (msg) => {
-        logger.debug(`Message received from client : ${msg.toString()}`);
+        logger.debug(`[${process.pid}] Message received from client : ${msg.toString()}`);
         ws.send(
             JSON.stringify({
                 sha: crypto.createHash("sha256").update(msg.toString()).digest("hex"),

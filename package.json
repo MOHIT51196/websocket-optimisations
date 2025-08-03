@@ -4,8 +4,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "server:start": "node --max-old-space-size=6096 --env-file=env/server.dev.env server/server.js",
-    "server:test": "node --max-old-space-size=6096 --env-file=env/server.test.env server/server.js",
+    "server:start": "node --max-old-space-size=4096 --env-file=env/server.dev.env server/server.js",
+    "server:test": "node --max-old-space-size=4096 --env-file=env/server.test.env server/server.js",
     "server:dev": "node --max-old-space-size=4096 --watch --env-file=env/server.dev.env server/server.js",
     "client:start": "node client/app.js",
     "client:dev": "node --watch --env-file=env/client.dev.env client/app.js"
